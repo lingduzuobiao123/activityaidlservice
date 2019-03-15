@@ -41,12 +41,8 @@ public class MyActivity extends AppCompatActivity {
     Button bottom4;
     @BindView(R.id.bottom5)
     Button bottom5;
+    private IUiServiceAidlInterface uiServiceAidlInterface;
     private IServiceUiAidlInterface serviceUiAidlInterface = new IServiceUiAidlInterface.Stub() {
-
-        @Override
-        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
-
-        }
 
         @Override
         public void serviceUiTest(TestBean testBean) throws RemoteException {
@@ -58,7 +54,6 @@ public class MyActivity extends AppCompatActivity {
             Log.e("dongxl", "activity--TestBean2==" + testBean.toString());
         }
     };
-    private IUiServiceAidlInterface uiServiceAidlInterface;
     ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {

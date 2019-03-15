@@ -2,11 +2,14 @@ package com.dongxl.activityaidlservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.dongxl.activityaidlservice.activity.MyActivity;
+import com.dongxl.activityaidlservice.fragment.MyFragment;
 import com.dongxl.activityaidlservice.service.MyService;
 
 import butterknife.BindView;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bottom, R.id.bottom1, R.id.bottom2, R.id.bottom3, R.id.bottom4, R.id.bottom5})
+    @OnClick({R.id.bottom, R.id.bottom1, R.id.bottom2, R.id.bottom3, R.id.bottom4, R.id.bottom5, R.id.bottom6})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bottom:
@@ -52,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.bottom5:
                 stopService();
+                break;
+            case R.id.bottom6:
+                addFragment();
                 break;
         }
     }
@@ -74,5 +80,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(this, MyService.class);
         startService(intent);
+    }
+
+    private void addFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, MyFragment.newInstance());
+        transaction.commitAllowingStateLoss();
     }
 }

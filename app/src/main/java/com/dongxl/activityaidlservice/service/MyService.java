@@ -19,11 +19,35 @@ import com.dongxl.activityaidlservice.bean.TestBean2;
  */
 public class MyService extends Service {
     private IServiceUiAidlInterface serviceUiAidlInterface;
-    private IUiServiceAidlInterface uiServiceAidlInterface = new IUiServiceAidlInterface.Stub() {
-        @Override
-        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
-            Log.e("dongxl", "service--basicTypes==");
-        }
+    private IUiServiceAidlInterface uiServiceAidlInterface;
+//    private IUiServiceAidlInterface uiServiceAidlInterface = new IUiServiceAidlInterface.Stub() {
+//        @Override
+//        public void registerCallback(IServiceUiAidlInterface callback) throws RemoteException {
+//            Log.e("dongxl", "service--registerCallback==");
+//            serviceUiAidlInterface = callback;
+//            TestBean testBean = new TestBean();
+//            testBean.setTestStr1("TestBean");
+//            ChildTestBean childTestBean = new ChildTestBean();
+//            childTestBean.setString("childTestBean");
+//            testBean.setChildTestBean(childTestBean);
+//            serviceUiAidlInterface.serviceUiTest(testBean);
+//            TestBean2 testBean2 = new TestBean2();
+//            testBean2.setaDouble1(1.11d);
+//            testBean2.setTestStr1("TestBean2");
+//            ChildTestBean childTestBean2 = new ChildTestBean();
+//            childTestBean2.setString("childTestBean2");
+//            testBean2.setChildTestBean(childTestBean2);
+//            serviceUiAidlInterface.serviceUiTest2(testBean2);
+//        }
+//
+//        @Override
+//        public void unRegisterCallback(IServiceUiAidlInterface callback) throws RemoteException {
+//            Log.e("dongxl", "service--unRegisterCallback==");
+//            serviceUiAidlInterface = null;
+//        }
+//    };
+
+    class UiServiceAidlInterface extends IUiServiceAidlInterface.Stub {
 
         @Override
         public void registerCallback(IServiceUiAidlInterface callback) throws RemoteException {
@@ -49,7 +73,7 @@ public class MyService extends Service {
             Log.e("dongxl", "service--unRegisterCallback==");
             serviceUiAidlInterface = null;
         }
-    };
+    }
 
     @Override
     public void onCreate() {
@@ -60,6 +84,9 @@ public class MyService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.e("dongxl", "service--onBind==" + intent.getStringExtra("MyService"));
+        if (null == uiServiceAidlInterface) {
+            uiServiceAidlInterface = new UiServiceAidlInterface();
+        }
         return uiServiceAidlInterface.asBinder();
     }
 

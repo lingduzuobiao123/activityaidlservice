@@ -2,19 +2,22 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EE00dd">
 
     <Button
         android:id="@+id/bottom1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bindserver" />
+        android:text="bindserver"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/bottom2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="bindserver1"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom1" />
 
 
@@ -23,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="unbindserver"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom2" />
 
     <Button
@@ -30,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="startserver"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom3" />
 
     <Button
@@ -37,5 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="stopserver"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom4" />
 </android.support.constraint.ConstraintLayout>
