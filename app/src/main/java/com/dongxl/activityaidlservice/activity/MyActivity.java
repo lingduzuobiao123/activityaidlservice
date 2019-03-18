@@ -145,6 +145,7 @@ public class MyActivity extends AppCompatActivity {
         try {
             // 当需要多次调用doSomething()方法的时候，如果直接bindService是会报错的
             unbindService(serviceConnection);
+//            startService();
         } catch (Exception e) {
             e.printStackTrace();
         }
